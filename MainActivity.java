@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
 
     private MyStructure myStructure;
     private String strcallback;
-    private String strcallbackfromworkerthread = "Callback from worker thread";
+    private String strcallbackfromworkerthread;
 
     // Used to load the 'native-lib' library on application startup.
     static
@@ -49,6 +49,13 @@ public class MainActivity extends AppCompatActivity
 
         TextView tvinsidek = (TextView) findViewById(R.id.textviewinsidek);
         tvinsidek.setText("from C:" +myStructure.insideMyStructure.insidek);
+        
+        TextView tvfromdifferentthread = (TextView)findViewById(R.id.textviewfromdifferentthread);
+        tvfromdifferentthread.setText(strcallbackfromworkerthread);
+
+        TextView tvcallback = (TextView)findViewById(R.id.textviewcallback);
+        tvcallback.setText(strcallback);
+
     }
 
     //callback from c++ native-lib.cpp
@@ -60,11 +67,7 @@ public class MainActivity extends AppCompatActivity
     //callback From worker thread in native-lib.cpp
     public void callbackFromWorkerThread()
     {
-        setContentView(R.layout.activity_main);
-        TextView tvfromdifferentthread = (TextView)findViewById(R.id.textviewfromdifferentthread);
-        TextView tvcallback = (TextView)findViewById(R.id.textviewcallback);
-        tvfromdifferentthread.setText(strcallbackfromworkerthread);
-        tvcallback.setText(strcallback);
+        strcallbackfromworkerthread = "Callback from worker thread";
     }
 
 
